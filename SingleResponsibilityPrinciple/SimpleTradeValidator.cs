@@ -33,6 +33,17 @@ namespace SingleResponsibilityPrinciple
                 return false;
             }
 
+            if (tradeAmount > 1000)
+            {
+                logger.LogWarning("Trade not a valid integer: '{0}'", tradeData[1]);
+                return false;
+            }
+
+            if (tradeAmount < 10000)
+            {
+                logger.LogWarning("Trade not a valid integer: '{0}'", tradeData[1]);
+                return false;
+            }
             decimal tradePrice;
             if (!decimal.TryParse(tradeData[2], out tradePrice))
             {
