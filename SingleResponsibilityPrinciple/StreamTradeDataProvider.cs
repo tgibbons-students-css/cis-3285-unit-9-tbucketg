@@ -2,20 +2,22 @@
 using System.IO;
 
 using SingleResponsibilityPrinciple.Contracts;
+using System.Net;
 
 namespace SingleResponsibilityPrinciple
 {
-    public class StreamTradeDataProvider : ITradeDataProvider
+    public class StreamTradeDataProvider 
     {
-        public StreamTradeDataProvider(Stream stream)
-        {
-            this.stream = stream;
-        }
+        //public StreamTradeDataProvider(Stream stream)
+        // {
+        //     this.stream = stream;
+        // }
+    
 
-        public IEnumerable<string> GetTradeData()
+        public IEnumerable<string> GetTradeData(string url)
         {
             var tradeData = new List<string>();
-            using (var reader = new StreamReader(stream))
+                        using (var reader = new StreamReader(url))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
@@ -26,6 +28,6 @@ namespace SingleResponsibilityPrinciple
             return tradeData;
         }
 
-        private readonly Stream stream;
+        private readonly string url;
     }
 }
